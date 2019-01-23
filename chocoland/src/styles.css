@@ -1,1 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+/*estilos navbar*/
+
+.navbarCafe {
+    background-color: #45322E !important;
+}
+
+.rotateImage {
+    -ms-transform: rotate(-20deg);
+    /* IE 9 */
+    -webkit-transform: rotate(-20deg);
+    /* Safari 3-8 */
+    transform: rotate(-20deg);
+}
+
+.navTextCenter {
+    text-align: center;
+    list-style: inside;
+    padding-left: 37% !important;
+}
+
+
+/*fin navbar*/
+
+
+/*media queryes bootstrap*/
+
+@media (max-width: 576px) {
+    .navTextCenter {
+        padding-left: 0% !important;
+    }
+}
+
+
+/* Medium devices (tablets, 768px and up)*/
+
+@media (max-width: 768px) {}
+
+
+/* Large devices (desktops, 992px and up)*/
+
+@media (max-width: 992px) {}
+
+
+/* Extra large devices (large desktops, 1200px and up)*/
+
+@media (max-width: 1200px) {}
