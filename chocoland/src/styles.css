@@ -18,7 +18,11 @@
 .navTextCenter {
     text-align: center;
     list-style: inside;
-    padding-left: 37% !important;
+    padding-left: 35% !important;
+}
+
+.fontMenu {
+    font-size: 20px;
 }
 
 
