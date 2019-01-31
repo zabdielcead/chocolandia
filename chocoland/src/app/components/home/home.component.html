@@ -1,32 +1,54 @@
-<p>HOMES</p>
-
-<ngb-carousel *ngIf="images">
-    <ng-template ngbSlide>
-        <img [src]="images[0]" alt="Random first slide">
-        <div class="carousel-caption">
-            <h3>10 seconds between slides...</h3>
-            <p>This carousel uses customized default values.</p>
-        </div>
-    </ng-template>
-    <ng-template ngbSlide>
-        <img [src]="images[1]" alt="Random second slide">
-        <div class="carousel-caption">
-            <h3>No mouse events...</h3>
-            <p>This carousel doesn't pause or resume on mouse events</p>
-        </div>
-    </ng-template>
-    <ng-template ngbSlide>
-        <img [src]="images[2]" alt="Random third slide">
-        <div class="carousel-caption">
-            <h3>No keyboard...</h3>
-            <p>This carousel uses customized default values.</p>
-        </div>
-    </ng-template>
-    <ng-template ngbSlide>
-        <img [src]="images[3]" alt="Random fourth slide">
-        <div class="carousel-caption">
-            <h3>And no wrap after last slide.</h3>
-            <p>This carousel uses customized default values.</p>
-        </div>
-    </ng-template>
-</ngb-carousel>
+<div class="row mt-3 ml-1 mr-1 text-center backgroudCarousel">
+    <div class="col-sm-12">
+        <ngb-carousel *ngIf=" images ">
+            <ng-template ngbSlide>
+                <img [src]="images[0] " alt="Random first slide ">
+                <div class="carousel-caption ">
+                    <h3>10 seconds between slides...</h3>
+                    <p>This carousel uses customized default values.</p>
+                </div>
+            </ng-template>
+            <ng-template ngbSlide>
+                <img [src]="images[1] " alt="Random second slide ">
+                <div class="carousel-caption ">
+                    <h3>No mouse events...</h3>
+                    <p>This carousel doesn't pause or resume on mouse events</p>
+                </div>
+            </ng-template>
+            <ng-template ngbSlide>
+                <img [src]="images[2] " alt="Random third slide ">
+                <div class="carousel-caption ">
+                    <h3>No keyboard...</h3>
+                    <p>This carousel uses customized default values.</p>
+                </div>
+            </ng-template>
+            <ng-template ngbSlide>
+                <img [src]="images[3] " alt="Random fourth slide ">
+                <div class="carousel-caption ">
+                    <h3>And no wrap after last slide.</h3>
+                    <p>This carousel uses customized default values.</p>
+                </div>
+            </ng-template>
+        </ngb-carousel>
+    </div>
+</div>
+<div class="row mt-3 ">
+    <div class="col-sm-12 col-md-4 text-center ">
+        <img class="rounded-circle center " [src]="images[3] " alt="Generic placeholder image " width="140 " height="140 ">
+        <h2>Artesanal</h2>
+        <p>materiales 100% naturales, preparados de la mejor manera Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent
+            commodo cursus magna.</p>
+    </div>
+    <div class="col-sm-12 col-md-4 text-center ">
+        <img class="rounded-circle center " [src]="images[3] " alt="Generic placeholder image " width="140 " height="140 ">
+        <h2>Artesanal</h2>
+        <p>materiales 100% naturales, preparados de la mejor manera Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent
+            commodo cursus magna.</p>
+    </div>
+    <div class="col-sm-12 col-md-4 text-center ">
+        <img class="rounded-circle center " [src]="images[3] " alt="Generic placeholder image " width="140 " height="140 ">
+        <h2>Artesanal</h2>
+        <p>materiales 100% naturales, preparados de la mejor manera Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent
+            commodo cursus magna.</p>
+    </div>
+</div>

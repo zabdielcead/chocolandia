@@ -35,6 +35,10 @@
 
 /* carousel*/
 
+.backgroudCarousel {
+    background-color: #e0dad6;
+}
+
 .animated,
 .carousel-item.active {
     -webkit-animation-duration: 1s;

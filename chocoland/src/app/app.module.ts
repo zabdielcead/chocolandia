@@ -12,6 +12,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { CatalogosComponent } from './components/catalogos/catalogos.component';
+import { CotizadorComponent } from './components/cotizador/cotizador.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { FooterComponent } from './components/footer/footer.component';
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    CatalogosComponent,
+    CotizadorComponent
   ],
   imports: [
     BrowserModule,
