@@ -11,5 +11,4 @@ export class CotizadorComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

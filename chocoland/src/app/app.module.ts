@@ -16,6 +16,11 @@ import { CatalogosComponent } from './components/catalogos/catalogos.component';
 import { CotizadorComponent } from './components/cotizador/cotizador.component';
 
 
+// servicios
+import { ProductosService } from './services/productos.service';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +36,9 @@ import { CotizadorComponent } from './components/cotizador/cotizador.component';
     APP_ROUTING,
     NgbModule
   ],
-  providers: [],
+  providers: [
+      ProductosService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
