@@ -1,8 +1,7 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductosService } from 'src/app/services/productos.service';
-import { Producto } from 'src/app/interfaces/productos.interface';
-
-
+import {  Catalogos } from 'src/app/interfaces/productos.catalogos';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -10,23 +9,25 @@ import { Producto } from 'src/app/interfaces/productos.interface';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent  implements OnInit {
   title = 'chocoland';
-  productos: Producto[];
-
-  @Output() activate:  EventEmitter<any> = new EventEmitter<any>();
-  constructor(private productosService: ProductosService) {
-    console.log('ejecutamos el servicio');
+  productos: Catalogos[];
+  constructor( private productosService: ProductosService ) {
     this.productosService.getProductos().subscribe( data => {
-        console.log(data);
-        this.productos = data;
-        // this.enviar();
-      }
-    );
+      this.productos = data;
+      console.log(  this.productos);
+      this.guardarSession(this.productos);
+      this.productosService.setProductosAllTime(this.productos);
+    });
   }
 
-  enviar() {
-    console.log('enviar');
-    this.activate.emit(this.productos);
+  ngOnInit() {
+    // ...
+
   }
+
+  guardarSession(  productos: Catalogos[]) {
+    sessionStorage.removeItem('chocolactea');
+      sessionStorage.setItem('chocolactea', JSON.stringify(productos));
+   }
 }
