@@ -72,6 +72,29 @@
 /*carousel*/
 
 
+/* 
+ catalogos
+*/
+
+.cardCatalog {
+    column-count: 2 !important;
+}
+
+.imgCatalogos {
+    width: 50% !important;
+    height: 100% !important;
+    border-radius: 25px;
+}
+
+.fondoCafeCatalogos {
+    background-color: #e0dad6;
+    border-radius: 25px;
+}
+
+
+/*fin catalogos*/
+
+
 /*media queryes bootstrap*/
 
 @media (max-width: 576px) {

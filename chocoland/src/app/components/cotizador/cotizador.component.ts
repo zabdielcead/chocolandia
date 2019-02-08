@@ -7,11 +7,11 @@ import { ActivatedRoute } from '@angular/router';
   styles: []
 })
 export class CotizadorComponent implements OnInit {
-  sub: any;
+  productos: any;
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.sub = this.route.snapshot.data;
+    this.productos = this.route.snapshot.data;
     console.log('cotizador', this.route.snapshot.data);
   }
 }

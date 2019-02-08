@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductosService } from 'src/app/services/productos.service';
 import {  Catalogos } from 'src/app/interfaces/productos.catalogos';
-import { Router, ActivatedRoute, Params, Data } from '@angular/router';
+import {  ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class AppComponent  implements OnInit, OnDestroy {
     this.productosService.getProductos().subscribe( data => {
       this.productos = data;
       console.log(  this.productos);
-      this.guardarSession(this.productos);
+      // this.guardarSession(this.productos);
       this.productosService.setProductosAllTime(this.productos);
     });
   }
@@ -29,9 +29,10 @@ export class AppComponent  implements OnInit, OnDestroy {
     console.log(  'destroy');
     this.productosService.prodAllTime = this.productos;
   }
-
+  /*
   guardarSession(  productos: Catalogos[]) {
     sessionStorage.removeItem('chocolactea');
       sessionStorage.setItem('chocolactea', JSON.stringify(productos));
    }
+   */
 }
