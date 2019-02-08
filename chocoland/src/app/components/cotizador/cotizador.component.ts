@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cotizador',
@@ -6,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class CotizadorComponent implements OnInit {
-
-  constructor() { }
+  sub: any;
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.sub = this.route.snapshot.data;
+    console.log('cotizador', this.route.snapshot.data);
   }
 }

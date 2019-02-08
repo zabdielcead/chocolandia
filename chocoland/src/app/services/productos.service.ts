@@ -2,7 +2,8 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Http } from '@angular/http';
 import { map } from 'rxjs/operators';
 import {  Catalogos } from 'src/app/interfaces/productos.catalogos';
-import {Observable} from 'rxjs';
+import { Resolve } from '@angular/router';
+
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import {Observable} from 'rxjs';
 })
 
 
-export class ProductosService {
+export class ProductosService implements Resolve<any> {
   productosURL = 'https://chocolactea-37ff8.firebaseio.com/catalogos.json';
   prodAllTime: Catalogos[];
   constructor(private http: Http) {
@@ -18,6 +19,11 @@ export class ProductosService {
 
   getProductos() {
     return this.http.get(this.productosURL).pipe(map(res =>  res.json() ));
+  }
+  resolve() {
+    console.log('ejecutando servicio');
+    // return this.http.get(this.productosURL).pipe(map(res =>  res.json() ));
+    return this.getProductosAllTime();
   }
 
 /*
@@ -35,3 +41,7 @@ export class ProductosService {
     return this.prodAllTime;
   }
 }
+
+
+
+

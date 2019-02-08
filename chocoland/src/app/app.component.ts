@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductosService } from 'src/app/services/productos.service';
 import {  Catalogos } from 'src/app/interfaces/productos.catalogos';
-import { Observable } from 'rxjs';
+import { Router, ActivatedRoute, Params, Data } from '@angular/router';
 
 
 @Component({
@@ -9,10 +9,10 @@ import { Observable } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent  implements OnInit {
+export class AppComponent  implements OnInit, OnDestroy {
   title = 'chocoland';
   productos: Catalogos[];
-  constructor( private productosService: ProductosService ) {
+  constructor( private productosService: ProductosService, private route: ActivatedRoute ) {
     this.productosService.getProductos().subscribe( data => {
       this.productos = data;
       console.log(  this.productos);
@@ -24,6 +24,10 @@ export class AppComponent  implements OnInit {
   ngOnInit() {
     // ...
 
+  }
+  ngOnDestroy() {
+    console.log(  'destroy');
+    this.productosService.prodAllTime = this.productos;
   }
 
   guardarSession(  productos: Catalogos[]) {
