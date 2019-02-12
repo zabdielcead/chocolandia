@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styles: []
 })
 export class CatalogosComponent implements OnInit {
-  productos: any;
+  productos: Producto[];
   constructor( private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -20,7 +20,7 @@ export class CatalogosComponent implements OnInit {
     */
 
     // this.sub = this.route.data.subscribe(v => console.log(v));
-    this.productos = this.route.snapshot.data;
-    console.log('catalogos', this.route.snapshot.data);
+    this.productos = this.route.snapshot.data['message'];
+    console.log('catalogos', this.route.snapshot.data['message']);
   }
 }

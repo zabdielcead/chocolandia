@@ -1,25 +1,25 @@
-<div class="row m-3 p-3 fondoCafeObscuroCatalogos">
-    <div class="col-sm-6 text-center mb-2">
-        <img src="../../../assets/img/chcolate.jpg" class="imgCatalogos" alt="img">
+<div class="row m-3 p-3 fondoCafeObscuroCatalogos" *ngFor="let k of productos | keys; let i = index">
+    <div class="col-sm-12 col-md-6 text-center mb-2">
+        <img [src]="productos[k].img | images" class="imgCatalogos" alt="img">
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-12 col-md-6">
         <div class="card">
             <div class="card-header">
-                Featured
+                {{productos[k].producto}}
             </div>
             <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <h5 class="card-title"> {{productos[k].desc1}}</h5>
+                <p class="card-text"> {{productos[k].precio_unitario}}</p>
             </div>
         </div>
     </div>
 </div>
+<!--
 <div class="row m-3 p-3 fondoCafeCatalogos">
-    <div class="col-sm-6 text-center  mb-2">
+    <div class="col-sm-12 col-md-6 text-center  mb-2">
         <img src="../../../assets/img/chcolate.jpg" class="imgCatalogos" alt="img">
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-12 col-md-6">
         <div class="card">
             <div class="card-header">
                 Featured
@@ -32,6 +32,7 @@
         </div>
     </div>
 </div>
+-->
 <!--
     <div class="card-columns">
         <img class="card-img-top" src="../../../assets/img/chcolate.jpg" alt="Card image cap">

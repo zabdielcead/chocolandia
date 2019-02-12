@@ -19,6 +19,10 @@ import { CotizadorComponent } from './components/cotizador/cotizador.component';
 // servicios
 import { ProductosService } from './services/productos.service';
 
+// pipes
+import { KeysPipe } from './pipes/keys.pipe';
+import { ImagesPipe } from './pipes/images.pipe';
+
 
 
 @NgModule({
@@ -28,7 +32,9 @@ import { ProductosService } from './services/productos.service';
     NavbarComponent,
     FooterComponent,
     CatalogosComponent,
-    CotizadorComponent
+    CotizadorComponent,
+    KeysPipe,
+    ImagesPipe
   ],
   imports: [
     BrowserModule,

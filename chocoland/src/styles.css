@@ -84,6 +84,19 @@
     width: 50% !important;
     height: 100% !important;
     border-radius: 25px;
+    background: white;
+    -webkit-transition-property: width, height;
+    /* Safari */
+    -webkit-transition-duration: 2s;
+    /* Safari */
+    transition-property: width, height;
+    transition-duration: 1s;
+    cursor: pointer;
+}
+
+.imgCatalogos:hover {
+    width: 90% !important;
+    height: 105% !important;
 }
 
 .fondoCafeCatalogos {
