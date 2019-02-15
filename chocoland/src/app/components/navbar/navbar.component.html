@@ -11,14 +11,14 @@
     <div class="collapse navbar-collapse " [ngClass]="{ 'show': navbarOpen }" id="navbarChocs">
         <ul class="navbar-nav mr-auto navTextCenter">
             <li class="nav-item active" routerLinkActive="active">
-                <a class="nav-link fontMenu" [routerLink]="['home']"> Home </a>
+                <a class="nav-link fontMenu" (click)="toggleNavbar()" [routerLink]="['home']"> Home </a>
             </li>
 
             <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link fontMenu" [routerLink]="['catalogos']">Catálogo </a>
+                <a class="nav-link fontMenu" (click)="toggleNavbar()" [routerLink]="['catalogos']">Catálogo </a>
             </li>
             <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link fontMenu" [routerLink]="['cotizador']">Cotizador </a>
+                <a class="nav-link fontMenu" (click)="toggleNavbar()" [routerLink]="['cotizador']">Cotizador </a>
             </li>
         </ul>
 

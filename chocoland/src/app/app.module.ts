@@ -23,7 +23,8 @@ import { ProductosService } from './services/productos.service';
 import { KeysPipe } from './pipes/keys.pipe';
 import { ImagesPipe } from './pipes/images.pipe';
 
-
+// forms
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,8 @@ import { ImagesPipe } from './pipes/images.pipe';
   imports: [
     BrowserModule,
     HttpModule,
+    FormsModule,
+    ReactiveFormsModule,
     APP_ROUTING,
     NgbModule
   ],
