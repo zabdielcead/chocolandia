@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Producto } from 'src/app/interfaces/productos.interface';
 import { Pedido } from 'src/app/interfaces/pedido';
 import { PedidoFormal } from 'src/app/interfaces/pedidoformal';
-import { FormGroup, FormArray, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -17,10 +17,11 @@ export class CotizadorComponent implements OnInit {
   pedidoFormal: PedidoFormal;
   pedido: Pedido[];
   sizeCatalogProducto: number;
-  fb: FormBuilder;
+  totalDineroPedido: number;
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.totalDineroPedido = 0;
     this.productos = this.route.snapshot.data['message'];
     this.sizeCatalogProducto = this.productos.length;
     this.pedido = this.setPedidosofProductos(this.productos);
@@ -33,50 +34,61 @@ export class CotizadorComponent implements OnInit {
     let pedidoSub: Pedido[] = [];
     if (this.sizeCatalogProducto > 0) {
 
-
-      // let pedidoF = new PedidoFormal('', '', '', pedido);
-     // product.forEach(function (val: Producto, index) {
-        /*
-        pedidos.pedido[index].id = val.id;
-        pedidos.pedido[index].id = val.id;
-        pedidos.pedido[index].id = val.id;
-        */
        for ( let val of product) {
          let pedidosArray = new Pedido(val.id, 0, 0, val.precio_unitario);
          pedidoSub.push(pedidosArray);
        }
-      // });
     }
     return pedidoSub;
   }
 
   setFormaValidators() {
-    // (<FormArray>this.checkoutFormGroup.get('products')).at(index);
-     // let arrPedidos =   this.pedidoFormal.pedido as FormArray ;
-     /*this.fb = new FormBuilder;
-       this.forma = this.fb.group({
-       });
-       */
    this.forma = new FormGroup({
       'nombre' : new FormControl('', [Validators.required, Validators.minLength(10)]),
       'email' :  new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
-      'telefono' :  new FormControl('', [Validators.required]),
+      'telefono' :  new FormControl('', [Validators.required, Validators.pattern('^(0|[1-9][0-9]*)$')]),
       'pedido': new FormArray([])
     });
     this.createFormArray();
   }
 
   createFormArray() {
-    // new FormControl(val , [Validators.pattern('/^[0-9]/')])
     for ( let val of this.pedidoFormal.pedido) {
       (<FormArray> this.forma.controls['pedido']).push(
-        new FormControl(val.id , [Validators.required])
+        new FormControl(val.id , [Validators.pattern('^(0|[1-9][0-9]*)$')])
       );
     }
   }
 
+  operacionTotalPedido(id: string, cantidad: string, precioUnitario: number) {
+      console.log('operacion', this.pedidoFormal);
+      cantidad = isNaN(parseFloat(cantidad)) ? '0' : cantidad;
+      if (cantidad !== '0') {
+        let cantidadNumber: number =  parseFloat(cantidad);
+        // let pedido: Pedido = this.pedidoFormal.pedido.find( resp => resp.id === id)
+        // this.totalDineroPedido = this.totalDineroPedido + (cantidadNumber * precioUnitario);
+        this.pedidoFormal.pedido.map(resp  => {
+          if (resp.id === id) {
+            resp.cantidad  = cantidadNumber;
+            resp.precioTotal = cantidadNumber * precioUnitario;
+          }
+        });
+      }
+      console.log('operacion2', this.pedidoFormal);
+  }
+
+  getPedidoTotal() {
+    let pedidoDinero = 0;
+    for ( let val of this.pedidoFormal.pedido ) {
+      pedidoDinero = pedidoDinero + ( val.cantidad * val.precioUnitario);
+    }
+    this.totalDineroPedido = pedidoDinero;
+  }
+
   guardarCambios() {
   }
+
+
 
 
 }

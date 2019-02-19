@@ -1,24 +1,42 @@
 <form [formGroup]="forma" (ngSubmit)="guardarCambios()" novalidate="novalidate">
+    <div class="alert alert-primary text-right" role="alert">
+        $ {{totalDineroPedido | number: '.1-2'}} MXN
+    </div>
     <div>
-        <div class="form-group row">
-            <label class="col-2 col-form-label">Nombre</label>
+        <div class="form-group row" [ngClass]="{ 'has-danger' : !forma.controls['nombre'].valid }">
+            <label class="col-2 form-control-label">Nombre</label>
             <div class="col-md-8">
-
-                <input class="form-control" type="text" placeholder="nombre" formControlName="nombre">
+                <input class="form-control" type="text" placeholder="Nombre" formControlName="nombre">
+                <div *ngIf="forma.controls['nombre'].errors?.required && forma.controls['nombre'].touched" class="form-control-feedback text-danger">
+                    Introduce un nombre
+                </div>
+                <div *ngIf="forma.controls['nombre'].errors?.minlength &&  forma.controls['nombre'].touched" class="form-control-feedback text-danger">
+                    Por lo menos 10 caracteres
+                </div>
             </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group row" [ngClass]="{ 'has-danger' : forma.controls['email'].valid }">
             <label class="col-2 col-form-label">Email</label>
             <div class="col-md-8">
-
-                <input class="form-control" type="text" placeholder="email" formControlName="email">
+                <input class="form-control" type="text" placeholder="Email" formControlName="email">
+                <div *ngIf="forma.controls['email'].errors?.required && forma.controls['email'].touched" class="form-control-feedback text-danger">
+                    Introduce un email
+                </div>
+                <div *ngIf="forma.controls['email'].errors?.pattern && forma.controls['email'].touched" class="form-control-feedback text-danger">
+                    Introduce un email correcto
+                </div>
             </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group row" [ngClass]="{ 'has-danger' : forma.controls['telefono'].valid }">
             <label class="col-2 col-form-label">Teléfono</label>
             <div class="col-md-8">
-
                 <input class="form-control" type="text" placeholder="Teléfono" formControlName="telefono">
+                <div *ngIf="forma.controls['telefono'].errors?.required && forma.controls['telefono'].touched" class="form-control-feedback text-danger">
+                    Introduce un teléfono
+                </div>
+                <div *ngIf="forma.controls['telefono'].errors?.pattern && forma.controls['telefono'].touched" class="form-control-feedback text-danger">
+                    Introduce un teléfono correcto
+                </div>
             </div>
         </div>
     </div>
@@ -37,10 +55,21 @@
                     <th scope="row">{{i+1}}</th>
                     <td><img [src]="productos[k].img | images" class="rounded-circle center" width="120" height="120" alt="img"></td>
                     <td>{{productos[k].producto}}</td>
-                    <td><input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" [formControlName]="i"></td>
+                    <td>
+                        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" [formControlName]="i">
+                        <div *ngIf="forma.controls['pedido'].controls[i].errors?.pattern && forma.controls['pedido'].controls[i].touched" class="form-control-feedback text-danger">
+                            Las cantidades deben ser numéricas
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div class="alert alert-primary text-right" role="alert">
+        $ {{totalDineroPedido | number: '.1-2'}} MXN
+    </div>
+    <div>
+        {{forma.valid}}
     </div>
 
 </form>
