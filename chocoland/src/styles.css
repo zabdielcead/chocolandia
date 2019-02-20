@@ -109,8 +109,21 @@
     border-radius: 25px;
 }
 
+.fondoClaroCatalogos {
+    background-color: #f7eee9;
+}
+
+.fondoClaroCatalogosDos {
+    background-color: #fbf7f4;
+}
+
 
 /*fin catalogos*/
+
+.fondoCafeCatalogos {
+    background-color: #e0dad6 !important;
+    border-radius: 25px;
+}
 
 
 /*media queryes bootstrap*/

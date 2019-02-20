@@ -4,6 +4,8 @@ import { Producto } from 'src/app/interfaces/productos.interface';
 import { Pedido } from 'src/app/interfaces/pedido';
 import { PedidoFormal } from 'src/app/interfaces/pedidoformal';
 import { FormGroup, FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import {  } from 'emailjs-com';
+
 
 
 @Component({
@@ -55,7 +57,7 @@ export class CotizadorComponent implements OnInit {
   createFormArray() {
     for ( let val of this.pedidoFormal.pedido) {
       (<FormArray> this.forma.controls['pedido']).push(
-        new FormControl(val.id , [Validators.pattern('^(0|[1-9][0-9]*)$')])
+        new FormControl('' , [Validators.pattern('^(0|[1-9][0-9]*)$')])
       );
     }
   }
@@ -75,6 +77,7 @@ export class CotizadorComponent implements OnInit {
         });
       }
       console.log('operacion2', this.pedidoFormal);
+      this.getPedidoTotal();
   }
 
   getPedidoTotal() {
@@ -88,7 +91,6 @@ export class CotizadorComponent implements OnInit {
   guardarCambios() {
   }
 
-
-
-
+  sendEmail() {
+  }
 }

@@ -1,10 +1,10 @@
 <form [formGroup]="forma" (ngSubmit)="guardarCambios()" novalidate="novalidate">
     <div class="alert alert-primary text-right" role="alert">
-        $ {{totalDineroPedido | number: '.1-2'}} MXN
+        <b>Total:</b> $ {{totalDineroPedido | number: '.1-2'}} MXN
     </div>
     <div>
         <div class="form-group row" [ngClass]="{ 'has-danger' : !forma.controls['nombre'].valid }">
-            <label class="col-2 form-control-label">Nombre</label>
+            <label class="col-2 form-control-label"><b>Nombre</b></label>
             <div class="col-md-8">
                 <input class="form-control" type="text" placeholder="Nombre" formControlName="nombre">
                 <div *ngIf="forma.controls['nombre'].errors?.required && forma.controls['nombre'].touched" class="form-control-feedback text-danger">
@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="form-group row" [ngClass]="{ 'has-danger' : forma.controls['email'].valid }">
-            <label class="col-2 col-form-label">Email</label>
+            <label class="col-2 col-form-label"><b>Email</b></label>
             <div class="col-md-8">
                 <input class="form-control" type="text" placeholder="Email" formControlName="email">
                 <div *ngIf="forma.controls['email'].errors?.required && forma.controls['email'].touched" class="form-control-feedback text-danger">
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="form-group row" [ngClass]="{ 'has-danger' : forma.controls['telefono'].valid }">
-            <label class="col-2 col-form-label">Teléfono</label>
+            <label class="col-2 col-form-label"><b>Teléfono</b></label>
             <div class="col-md-8">
                 <input class="form-control" type="text" placeholder="Teléfono" formControlName="telefono">
                 <div *ngIf="forma.controls['telefono'].errors?.required && forma.controls['telefono'].touched" class="form-control-feedback text-danger">
@@ -41,22 +41,22 @@
         </div>
     </div>
     <div>
-        <table class="table">
-            <thead class="thead-dark">
+        <table class="table text-center">
+            <thead class="fondoCafeCatalogos">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Foto</th>
                     <th scope="col">Producto y Precio unitario</th>
-                    <th scope="col">Cantidad</th>
+                    <th scope="col">Cantidad (Piezas)</th>
                 </tr>
             </thead>
             <tbody formArrayName="pedido">
-                <tr *ngFor="let k of productos | keys; let i = index">
+                <tr *ngFor="let k of productos | keys; let i = index" [ngClass]="i % 2 ? 'fondoClaroCatalogos' : 'fondoClaroCatalogosDos' ">
                     <th scope="row">{{i+1}}</th>
                     <td><img [src]="productos[k].img | images" class="rounded-circle center" width="120" height="120" alt="img"></td>
-                    <td>{{productos[k].producto}}</td>
+                    <td>{{productos[k].producto | uppercase}} <br> $ {{productos[k].precio_unitario | number: '.1-2'}} MXN</td>
                     <td>
-                        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" [formControlName]="i">
+                        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" [formControlName]="i" (blur)="operacionTotalPedido(productos[k].id, $event.target.value ,productos[k].precio_unitario )">
                         <div *ngIf="forma.controls['pedido'].controls[i].errors?.pattern && forma.controls['pedido'].controls[i].touched" class="form-control-feedback text-danger">
                             Las cantidades deben ser numéricas
                         </div>
@@ -66,7 +66,10 @@
         </table>
     </div>
     <div class="alert alert-primary text-right" role="alert">
-        $ {{totalDineroPedido | number: '.1-2'}} MXN
+        <b>Total:</b> $ {{totalDineroPedido | number: '.1-2'}} MXN
+    </div>
+    <div>
+        <button type="button" class="btn btn-primary" (click)="sendEmail()">Primary</button>
     </div>
     <div>
         {{forma.valid}}
