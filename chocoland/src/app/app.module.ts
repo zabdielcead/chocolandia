@@ -18,6 +18,7 @@ import { CotizadorComponent } from './components/cotizador/cotizador.component';
 
 // servicios
 import { ProductosService } from './services/productos.service';
+import { EmailService } from './services/email.service';
 
 // pipes
 import { KeysPipe } from './pipes/keys.pipe';
@@ -46,7 +47,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgbModule
   ],
   providers: [
-      ProductosService
+      ProductosService,
+      EmailService
   ],
   bootstrap: [AppComponent]
 })

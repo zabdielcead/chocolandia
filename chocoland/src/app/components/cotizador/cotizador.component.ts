@@ -4,8 +4,8 @@ import { Producto } from 'src/app/interfaces/productos.interface';
 import { Pedido } from 'src/app/interfaces/pedido';
 import { PedidoFormal } from 'src/app/interfaces/pedidoformal';
 import { FormGroup, FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
-import {  } from 'emailjs-com';
-
+import { EmailParams } from '../../interfaces/emailParams';
+import { EmailService } from '../../services/email.service';
 
 
 @Component({
@@ -20,7 +20,9 @@ export class CotizadorComponent implements OnInit {
   pedido: Pedido[];
   sizeCatalogProducto: number;
   totalDineroPedido: number;
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder) { }
+  meses = new Array ('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto',
+                       'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private emailService: EmailService) { }
 
   ngOnInit() {
     this.totalDineroPedido = 0;
@@ -92,5 +94,33 @@ export class CotizadorComponent implements OnInit {
   }
 
   sendEmail() {
+    let params: EmailParams = new EmailParams(this.forma.controls['nombre'].value, this.forma.controls['email'].value,
+                                              this.forma.controls['telefono'].value, this.getPedidoCantidad(),
+                                              this.totalDineroPedido , this.getFechaHora());
+    console.log('params', params);
+    /*
+    this.emailService.sendMail(params).subscribe( resp => {
+      if (resp) {
+        console.log('bien');
+      } else {
+        console.log('mal');
+      }
+    });
+    */
+  }
+
+  getPedidoCantidad() {
+      let pedido = '';
+      this.pedidoFormal.pedido.map(resp  => {
+          if ( resp.cantidad !== 0 ) {
+            pedido += `<p>id: ${resp.id} | precio unitario: ${resp.precioUnitario} |  cantidad: ${resp.cantidad} </p>`;
+          }
+      });
+      return pedido;
+  }
+
+  getFechaHora() {
+    let fecha = new Date();
+    return `${fecha.getFullYear()}-${this.meses[fecha.getMonth()]}-${fecha.getDate()}`;
   }
 }
