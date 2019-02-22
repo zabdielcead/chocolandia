@@ -68,8 +68,13 @@
     <div class="alert alert-primary text-right" role="alert">
         <b>Total:</b> $ {{totalDineroPedido | number: '.1-2'}} MXN
     </div>
-    <div>
-        <button type="button" class="btn btn-primary" (click)="sendEmail()">Enviar Email</button>
+    <div class="col-sm-12 row">
+        <div class="col-sm-4">
+            <button type="button" class="btn btn-primary" (click)="guardarCambios()" [disabled]="!bsendMail">Enviar Email</button>
+        </div>
+        <div *ngIf="!bsendMail" class="alert alert-primary col-sm-8" role="alert">
+            Se ha enviado correo exitosamente :D
+        </div>
     </div>
     <div>
         {{forma.valid}}

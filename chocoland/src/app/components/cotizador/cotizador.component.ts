@@ -20,6 +20,7 @@ export class CotizadorComponent implements OnInit {
   pedido: Pedido[];
   sizeCatalogProducto: number;
   totalDineroPedido: number;
+  bsendMail: boolean;
   meses = new Array ('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto',
                        'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private emailService: EmailService) { }
@@ -32,6 +33,7 @@ export class CotizadorComponent implements OnInit {
     this.pedidoFormal = new PedidoFormal('', '', '', this.pedido);
     // console.log('cotizador', this.route.snapshot.data);
     this.setFormaValidators();
+    this.bsendMail = true;
     console.log('pedidos', this.pedido);
   }
   setPedidosofProductos(product: Producto[]) {
@@ -91,29 +93,27 @@ export class CotizadorComponent implements OnInit {
   }
 
   guardarCambios() {
+    if (this.bsendMail && this.forma) {
+      this.sendEmail();
+    }
   }
 
   sendEmail() {
     let params: EmailParams = new EmailParams(this.forma.controls['nombre'].value, this.forma.controls['email'].value,
                                               this.forma.controls['telefono'].value, this.getPedidoCantidad(),
                                               this.totalDineroPedido , this.getFechaHora());
-    console.log('params', params);
-    /*
     this.emailService.sendMail(params).subscribe( resp => {
       if (resp) {
-        console.log('bien');
-      } else {
-        console.log('mal');
+        this.bsendMail = false;
       }
     });
-    */
   }
 
   getPedidoCantidad() {
       let pedido = '';
       this.pedidoFormal.pedido.map(resp  => {
           if ( resp.cantidad !== 0 ) {
-            pedido += `<p>id: ${resp.id} | precio unitario: ${resp.precioUnitario} |  cantidad: ${resp.cantidad} </p>`;
+            pedido += `<p>id: <b>${resp.id}</b> | precio unitario: <b>${resp.precioUnitario}</b> |  cantidad: <b>${resp.cantidad}</b> </p>`;
           }
       });
       return pedido;

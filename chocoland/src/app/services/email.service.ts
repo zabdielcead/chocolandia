@@ -20,7 +20,7 @@ export class EmailService {
     let headers = new Headers({
       'Content-type' : 'application/json'
     });
-    console.log('body', body);
+    // console.log('body', body);
      /*return this.http.post(this.urlEmail, body, {headers}).subscribe(
        res => {
           console.log('email', res.text);
