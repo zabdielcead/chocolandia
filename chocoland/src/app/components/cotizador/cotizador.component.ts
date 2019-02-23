@@ -53,6 +53,7 @@ export class CotizadorComponent implements OnInit {
       'nombre' : new FormControl('', [Validators.required, Validators.minLength(10)]),
       'email' :  new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
       'telefono' :  new FormControl('', [Validators.required, Validators.pattern('^(0|[1-9][0-9]*)$')]),
+      'fechauser' : new FormControl('', [Validators.required, Validators.pattern('[0-9]{2}[/][0-9]{2}[/][0-9]{4}$')]),
       'pedido': new FormArray([])
     });
     this.createFormArray();
@@ -101,7 +102,7 @@ export class CotizadorComponent implements OnInit {
   sendEmail() {
     let params: EmailParams = new EmailParams(this.forma.controls['nombre'].value, this.forma.controls['email'].value,
                                               this.forma.controls['telefono'].value, this.getPedidoCantidad(),
-                                              this.totalDineroPedido , this.getFechaHora());
+                                              this.totalDineroPedido , this.getFechaHora(), this.forma.controls['fechauser'].value);
     this.emailService.sendMail(params).subscribe( resp => {
       if (resp) {
         this.bsendMail = false;

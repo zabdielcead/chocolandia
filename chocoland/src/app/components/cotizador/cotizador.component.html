@@ -1,5 +1,5 @@
 <form [formGroup]="forma" (ngSubmit)="guardarCambios()" novalidate="novalidate">
-    <div class="alert alert-primary text-right" role="alert">
+    <div class="alert alert-warning text-right" role="alert">
         <b>Total:</b> $ {{totalDineroPedido | number: '.1-2'}} MXN
     </div>
     <div>
@@ -39,6 +39,18 @@
                 </div>
             </div>
         </div>
+        <div class="form-group row" [ngClass]="{ 'has-danger' : forma.controls['fechauser'].valid }">
+            <label class="col-2 col-form-label"><b>Fecha de tu evento</b></label>
+            <div class="col-md-8">
+                <input class="form-control" type="text" placeholder="DD/MM/YYYY" formControlName="fechauser">
+                <div *ngIf="forma.controls['fechauser'].errors?.required && forma.controls['fechauser'].touched" class="form-control-feedback text-danger">
+                    Introduce una fecha
+                </div>
+                <div *ngIf="forma.controls['fechauser'].errors?.pattern && forma.controls['fechauser'].touched" class="form-control-feedback text-danger">
+                    Introduce una fecha valida
+                </div>
+            </div>
+        </div>
     </div>
     <div>
         <table class="table text-center">
@@ -54,7 +66,7 @@
                 <tr *ngFor="let k of productos | keys; let i = index" [ngClass]="i % 2 ? 'fondoClaroCatalogos' : 'fondoClaroCatalogosDos' ">
                     <th scope="row">{{i+1}}</th>
                     <td><img [src]="productos[k].img | images" class="rounded-circle center" width="120" height="120" alt="img"></td>
-                    <td>{{productos[k].producto | uppercase}} <br> $ {{productos[k].precio_unitario | number: '.1-2'}} MXN</td>
+                    <td>{{productos[k].producto | uppercase}} <br> <b>$ {{productos[k].precio_unitario | number: '.1-2'}} MXN</b></td>
                     <td>
                         <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" [formControlName]="i" (blur)="operacionTotalPedido(productos[k].id, $event.target.value ,productos[k].precio_unitario )">
                         <div *ngIf="forma.controls['pedido'].controls[i].errors?.pattern && forma.controls['pedido'].controls[i].touched" class="form-control-feedback text-danger">
@@ -65,15 +77,15 @@
             </tbody>
         </table>
     </div>
-    <div class="alert alert-primary text-right" role="alert">
+    <div class="alert alert-warning text-right" role="alert">
         <b>Total:</b> $ {{totalDineroPedido | number: '.1-2'}} MXN
     </div>
-    <div class="col-sm-12 row">
-        <div class="col-sm-4">
-            <button type="button" class="btn btn-primary" (click)="guardarCambios()" [disabled]="!bsendMail">Enviar Email</button>
+    <div class="row">
+        <div class="col-sm-12">
+            <button type="button" class="btn btn-primary float-sm-right" (click)="guardarCambios()" [disabled]="!bsendMail">Enviar Email</button>
         </div>
-        <div *ngIf="!bsendMail" class="alert alert-primary col-sm-8" role="alert">
-            Se ha enviado correo exitosamente :D
+        <div *ngIf="!bsendMail" class="alert alert-warning col-sm-12 text-center" role="alert">
+            Se ha enviado correo exitosamente, en breve te contactaremos :D
         </div>
     </div>
     <div>
